@@ -134,7 +134,7 @@
                 <ul class="list-unstyled mt-3">
                   <li><i class="bi bi-arrow-right text-white me-2 fw-bold" style="font-size: 14px;"></i> <strong>Frontend:</strong> <small>HTML5, CSS3, JavaScript, TypeScript, Angular, Bootstrap, Astro, SCSS, Tailwind CSS</small></li>
                   <li><i class="bi bi-arrow-right text-white me-2 fw-bold" style="font-size: 14px;"></i> <strong>Backend:</strong> <small>PHP, Python, Node.js, Express.js, Flask, Django</small></li>
-                  <li><i class="bi bi-arrow-right text-white me-2 fw-bold" style="font-size: 14px;"></i> <strong>Languages:</strong> <small>C, C++, Java, R</small></li>
+                  <li><i class="bi bi-arrow-right text-white me-2 fw-bold" style="font-size: 14px;"></i> <strong>Languages:</strong> <small>C, C++, Java, R, Dart</small></li>
                   <li><i class="bi bi-arrow-right text-white me-2 fw-bold" style="font-size: 14px;"></i> <strong>Databases:</strong> <small> MySQL, Firebase, Firestore</small></li>
                   <li><i class="bi bi-arrow-right text-white me-2 fw-bold" style="font-size: 14px;"></i> <strong>Deployment:</strong> <small>Nginx, Apache, Gunicorn, Netlify, Vercel</small></li>
                   <li><i class="bi bi-arrow-right text-white me-2 fw-bold" style="font-size: 14px;"></i> <strong>Version Control:</strong> <small>Git, GitHub</small></li>
@@ -268,8 +268,8 @@
           </div>
 		  
           <div class="clickable-button">
-            <a href="" class="px-3">Resume</a>
-            <a href="">Cover Letter</a>
+            <a href="{{ url_for('static', filename='/documents/Victor_Chukwuemeka_Resume.pdf') }}" class="px-3" download="">Resume</a>
+            <a href="{{ url_for('static', filename='/documents/Victor_Chukwuemeka_Cover_letter.pdf') }}" download="">Cover Letter</a>
           </div>
 
         </div>
@@ -304,85 +304,35 @@
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-web-app">
               <div class="portfolio-content h-100">
-                <img src="{{ url_for('static', filename='/images/portfolio/img1.png') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>SHINE</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/app-1.jpg" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-mobile-app">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Product 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/product-1.jpg" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-scripts">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Branding 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/branding-1.jpg" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Books 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/books-1.jpg" title="Branding 1" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-web-app">
-              <div class="portfolio-content h-100">
                 <img src="{{ url_for('static', filename='/images/portfolio/img2.png') }}" class="img-fluid" alt="">
                 <div class="portfolio-info">
                   <h4>NASS-SACOETEC ASSOCIATION</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/app-1.jpg" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <p>Engineered an official app for NASS-SACOETEC.</p>
+                  <a href="{{ url_for('static', filename='/images/portfolio/img2.png') }}" title="NASS-SACOETEC ASSOCIATION" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
 
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-mobile-app">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-mobile-app">
               <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt="">
+                <img src="{{ url_for('static', filename='/images/portfolio/mobile_app1.png') }}" class="img-fluid" alt="">
                 <div class="portfolio-info">
-                  <h4>Product 1</h4>
+                  <h4>PAYLAAR</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/product-1.jpg" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="{{ url_for('static', filename='/images/portfolio/mobile_app1.png') }}" title="Paylaar" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
 
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-scripts">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-scripts">
               <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt="">
+                <img src="{{ url_for('static', filename='/images/portfolio/script1.png') }}" class="img-fluid" alt="">
                 <div class="portfolio-info">
-                  <h4>Branding 1</h4>
+                  <h4>BINARY TREE</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/branding-1.jpg" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="{{ url_for('static', filename='/images/portfolio/script1.png') }}" title="Binary Tree" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
@@ -406,32 +356,32 @@
                 <img src="{{ url_for('static', filename='/images/portfolio/img3.png') }}" class="img-fluid" alt="">
                 <div class="portfolio-info">
                   <h4>JOAM COLLECTIONS</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/app-1.jpg" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <p>Created a fashion e-commerce platform.</p>
+                  <a href="{{ url_for('static', filename='/images/portfolio/img3.png') }}" title="JOAM COLLECTIONS" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
 
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-mobile-app">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-mobile-app">
               <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt="">
+                <img src="{{ url_for('static', filename='/images/portfolio/mobile_app2.png') }}" class="img-fluid" alt="">
                 <div class="portfolio-info">
-                  <h4>Product 1</h4>
+                  <h4>DWELLEVER</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/product-1.jpg" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="{{ url_for('static', filename='/images/portfolio/mobile_app2.png') }}" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
 
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-scripts">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-scripts">
               <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt="">
+                <img src="{{ url_for('static', filename='/images/portfolio/script2.png') }}" class="img-fluid" alt="">
                 <div class="portfolio-info">
-                  <h4>Branding 1</h4>
+                  <h4>HBNB</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/branding-1.jpg" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="{{ url_for('static', filename='/images/portfolio/script2.png') }}" title="HBNB" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
@@ -456,32 +406,32 @@
                 <img src="{{ url_for('static', filename='/images/portfolio/img5.png') }}" class="img-fluid" alt="">
                 <div class="portfolio-info">
                   <h4>SACOETEC-CSC-DEPT</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/app-1.jpg" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <p>Built a departmental activity app.</p>
+                  <a href="{{ url_for('static', filename='/images/portfolio/img5.png') }}" title="SACOETEC-CSC-DEPT" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
 
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-mobile-app">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-mobile-app">
               <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt="">
+                <img src="{{ url_for('static', filename='/images/portfolio/mobile_app3.png') }}" class="img-fluid" alt="">
                 <div class="portfolio-info">
-                  <h4>Product 1</h4>
+                  <h4>EVENT FACE RECOGNITION ATTENDANCE</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/product-1.jpg" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="{{ url_for('static', filename='/images/portfolio/mobile_app3.png') }}" title="EVENT FACE RECOGNITION ATTENDANCE" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
 
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-scripts">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-scripts">
               <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt="">
+                <img src="{{ url_for('static', filename='/images/portfolio/script3.png') }}" class="img-fluid" alt="">
                 <div class="portfolio-info">
-                  <h4>Branding 1</h4>
+                  <h4>SIMPLE SHELL</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/branding-1.jpg" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="{{ url_for('static', filename='/images/portfolio/script3.png') }}" title="SIMPLE SHELL" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
@@ -506,32 +456,32 @@
                 <img src="{{ url_for('static', filename='/images/portfolio/img4.png') }}" class="img-fluid" alt="">
                 <div class="portfolio-info">
                   <h4>TRADE WITH TAYE OJ</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/app-1.jpg" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <p>Developed an online store for apparel.</p>
+                  <a href="{{ url_for('static', filename='/images/portfolio/img4.png') }}" title="TRADE WITH TAYE OJ" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
 
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-mobile-app">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-mobile-app">
               <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt="">
+                <img src="{{ url_for('static', filename='/images/portfolio/mobile_app4.png') }}" class="img-fluid" alt="">
                 <div class="portfolio-info">
-                  <h4>Product 1</h4>
+                  <h4>UNLIMITED HEALTH</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/product-1.jpg" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="{{ url_for('static', filename='/images/portfolio/mobile_app4.png') }}" title="UNLIMITED HEALTH" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
 
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-scripts">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-scripts">
               <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt="">
+                <img src="{{ url_for('static', filename='/images/portfolio/script4.png') }}" class="img-fluid" alt="">
                 <div class="portfolio-info">
-                  <h4>Branding 1</h4>
+                  <h4>PRINTF</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/branding-1.jpg" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="{{ url_for('static', filename='/images/portfolio/script4.png') }}" title="PRINTF" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
@@ -556,155 +506,8 @@
                 <img src="{{ url_for('static', filename='/images/portfolio/img6.png') }}" class="img-fluid" alt="">
                 <div class="portfolio-info">
                   <h4>UNLIMITED HEALTH</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/app-1.jpg" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-mobile-app">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Product 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/product-1.jpg" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-scripts">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Branding 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/branding-1.jpg" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Books 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/books-1.jpg" title="Branding 1" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-web-app">
-              <div class="portfolio-content h-100">
-                <img src="{{ url_for('static', filename='/images/portfolio/img1.png') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Shine</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/app-1.jpg" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-mobile-app">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Product 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/product-1.jpg" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-scripts">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Branding 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/branding-1.jpg" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Books 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/books-1.jpg" title="Branding 1" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-web-app">
-              <div class="portfolio-content h-100">
-                <img src="{{ url_for('static', filename='/images/portfolio/img1.png') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Shine</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/app-1.jpg" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-mobile-app">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Product 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/product-1.jpg" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-scripts">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Branding 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/branding-1.jpg" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <!--<div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Books 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/books-1.jpg" title="Branding 1" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-web-app">
-              <div class="portfolio-content h-100">
-                <img src="{{ url_for('static', filename='/images/portfolio/img1.png') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Shine</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="assets/img/portfolio/app-1.jpg" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <p>Built an AI-powered health diagnostic and consultation app.</p>
+                  <a href="{{ url_for('static', filename='/images/portfolio/img6.png') }}" title="UNLIMITED HEALTH" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                   <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
@@ -770,52 +573,52 @@
         <div class="row gy-4">
 
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
-            <div class="icon flex-shrink-0"><i class="bi bi-briefcase"></i></div>
+            <div class="icon flex-shrink-0"><i class="bi bi-code-slash"></i></div>
             <div>
-              <h4 class="title"><a href="service-details.html" class="stretched-link">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+              <h4 class="title"><a href="service-details.html" class="stretched-link">Web and Mobile Devlopment</a></h4>
+              <p class="description">I create responsive and dynamic applications that are user-friendly and visually appealing.</p>
             </div>
           </div>
           <!-- End Service Item -->
 
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="200">
-            <div class="icon flex-shrink-0"><i class="bi bi-card-checklist"></i></div>
+            <div class="icon flex-shrink-0"><i class="bi bi-palette"></i></div>
             <div>
-              <h4 class="title"><a href="service-details.html" class="stretched-link">Dolor Sitema</a></h4>
-              <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+              <h4 class="title"><a href="service-details.html" class="stretched-link">Frontend Design</a></h4>
+              <p class="description">I design clean, modern user interfaces that ensure smooth and engaging user experiences.</p>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="300">
-            <div class="icon flex-shrink-0"><i class="bi bi-bar-chart"></i></div>
+            <div class="icon flex-shrink-0"><i class="bi bi-shield-lock"></i></div>
             <div>
-              <h4 class="title"><a href="service-details.html" class="stretched-link">Sed ut perspiciatis</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+              <h4 class="title"><a href="service-details.html" class="stretched-link">Authentication Systems</a></h4>
+              <p class="description">I build secure login systems to protect user data and ensure reliable access control.</p>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="400">
-            <div class="icon flex-shrink-0"><i class="bi bi-binoculars"></i></div>
+            <div class="icon flex-shrink-0"><i class="bi bi-speedometer2"></i></div>
             <div>
-              <h4 class="title"><a href="service-details.html" class="stretched-link">Magni Dolores</a></h4>
-              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+              <h4 class="title"><a href="service-details.html" class="stretched-link">Dashboard & Admin Panels</a></h4>
+              <p class="description">I develop dashboards for managing content, monitoring activities, and handling administrative tasks.</p>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="500">
-            <div class="icon flex-shrink-0"><i class="bi bi-brightness-high"></i></div>
+            <div class="icon flex-shrink-0"><i class="bi bi-credit-card"></i></div>
             <div>
-              <h4 class="title"><a href="service-details.html" class="stretched-link">Nemo Enim</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-            </div>
+              <h4 class="title"><a href="service-details.html" class="stretched-link">Payment Integration</a></h4>
+              <p class="description">I set up reliable and secure payment systems to support online transactions and purchases.</p>
+             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="600">
-            <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week"></i></div>
+            <div class="icon flex-shrink-0"><i class="bi bi-mortarboard"></i></div>
             <div>
-              <h4 class="title"><a href="service-details.html" class="stretched-link">Eiusmod Tempor</a></h4>
-              <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
-            </div>
+              <h4 class="title"><a href="service-details.html" class="stretched-link">Mentorship & Training</a></h4>
+              <p class="description">I guide aspiring developers by teaching foundational of both web and mobile concepts and best practices in design.</p>
+             </div>
           </div><!-- End Service Item -->
 
         </div>
