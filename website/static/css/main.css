@@ -777,6 +777,20 @@ section,
   border: 2px solid var(--accent-color);
 }
 
+.resume .container .row .clickable-button {
+  text-align: right;
+}
+
+.resume .container .row .clickable-button a {
+  border: 2px solid var(--accent-color);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.resume .container .row .clickable-button a:hover {
+  background-color: var(--accent-color);
+  color: #fff;
+}
 /*--------------------------------------------------------------
 # Portfolio Section
 --------------------------------------------------------------*/
