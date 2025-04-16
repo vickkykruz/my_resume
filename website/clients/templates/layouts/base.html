@@ -47,7 +47,7 @@
   <link href="{{ url_for('views.static', filename='css/main.css') }}" rel="stylesheet">
 </head>
 
-<body class="index-page">
+<body class="{% if navRoute == 'home' %}index-page{% elif navRoute == 'service' %}service-details-page{% endif %}">
 
   <header id="header" class="header dark-background d-flex flex-column">
     <i class="header-toggle d-xl-none bi bi-list"></i>
