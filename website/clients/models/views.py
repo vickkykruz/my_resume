@@ -2,7 +2,10 @@
 This is a module that define views routes for the users to access...
 """
 
-from flask import Blueprint, render_template, flash, request, redirect, url_for, make_response, current_app, session, jsonify
+from flask import Blueprint, render_template, flash, request, redirect, url_for, make_response, current_app, session, jsonify, abort
+from website.mailer.mail import mail
+from flask_mail import Message
+from website.clients.models.utils import send_alert_email
 
 # Define the BluePrint
 views = Blueprint(
@@ -25,6 +28,8 @@ def home():
 @views.route("/service-page")
 def service_page():
     """ This is a route that display the service page """
+
+    key = request.args.get("key")  # Get key from URL query parameter
     navRoute = "service"
 
     services = {
@@ -123,4 +128,31 @@ def service_page():
             
     }
 
-    return render_template("service-details.html", navRoute=navRoute)
+    if not key or key not in services:
+        return abort(404)
+
+    service_data = services[key][0]
+    return render_template("service-details.html", navRoute=navRoute, service=service_data)
+
+
+@views.route("/send-mail", methods=["POST"])
+def send_contact_mail():
+    """ This is a function that process the contact us functionalities """
+
+    name = request.form.get("name")
+    email = request.form.get("email")
+    subject = request.form.get("subject")
+    message = request.form.get("message")
+    action = "View new job alert"
+
+    if not all([name, email, subject, message]):
+        return jsonify({"error": "All fields are required."}), 400
+
+    try:
+        send_alert_email(subject, name, message, action, email)
+
+        return jsonify({"success": "Message sent successfully."}), 200
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"error": f"Failed to send message: {str(e)}"}), 500

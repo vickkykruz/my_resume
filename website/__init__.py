@@ -9,6 +9,8 @@ from website.clients.models.views import views
 #from website.clients.models.auth import auth
 #from website.admin.models.auth import adminAuth
 #from website.admin.models.views import adminViews
+import firebase_admin
+from firebase_admin import credentials, firestore, storage
 from os import path, environ
 from datetime import timedelta
 from flask_mail import Mail
@@ -16,12 +18,32 @@ from werkzeug.security import generate_password_hash
 #from website.admin.models.models import Admin
 import logging
 from logging.handlers import RotatingFileHandler
+from dotenv import load_dotenv
+import pyrebase
+import requests
+
+
+# Load environment variables once at startup
+load_dotenv()
 
 # Connect to database
 DB_NAME = 'vickkyprogramming.db'
+EVENT_FACE_RECONGITION_FIREBASE_CREDENTIALS = environ.get('EVENT_FACE_RECONGITION_FIREBASE_KEY_PATH')
+TELEMEDICAL_FIREBASE_CREDENTIALS = environ.get('TELEMEDICAL_FIREBASE_KEY_PATH')
+IPINFO_API_TOKEN = environ.get('IPINFO_API_TOKEN')
+
+if not firebase_admin._apps:
+    event_face_recognition_cred = credentials.Certificate(EVENT_FACE_RECONGITION_FIREBASE_CREDENTIALS)
+    telemedical_cred = credentials.Certificate(TELEMEDICAL_FIREBASE_CREDENTIALS)
+
+    event_app = firebase_admin.initialize_app(event_face_recognition_cred, name="event-face")
+    telemedical_app = firebase_admin.initialize_app(telemedical_cred, {
+        'storageBucket': 'telemedical-710dc.appspot.com'
+    }, name="telemedical")
+
 
 # Here to store the uploaded images
-#UPLOAD_FOLDER = 'website/static/uploads'
+UPLOAD_FOLDER = "website/static/uploads"
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -50,6 +72,21 @@ def create_app():
     app.config['SESSION_COOKIE_HTTPONLY'] = True  # Helps mitigate cross-site scripting (XSS)
     app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
+    # Firebase Pyrebase Config (Replace with your actual Firebase project details)
+    firebase_config = {
+            'apiKey': environ.get('FIREBASE_APIKEY'),
+            'authDomain': environ.get('FIREBASE_AUTHDOMAIN'),
+            'projectId': environ.get('FIREBASE_PROJECTID'),
+            'storageBucket': environ.get('FIREBASE_STOREAGEBUCKET'),
+            'messagingSenderId': environ.get('FIRBASE_MESSAGEINGSENDERID'),
+            'appId': environ.get('FIREBASE_APPID'),
+            'measurementId': environ.get('FIREBASE_MEASUREMENTID'),
+            'databaseURL': environ.get('FIREBASE_DATABASEURL')
+    }
+
+    # Store firebase_config in app.config
+    app.config['FIREBASE_CONFIG'] = firebase_config
+
     # Define template folders for clients and admin
     client_template_folder = path.join(app.root_path, 'clients', 'templates')
 #    admin_template_folder = path.join(app.root_path, 'admin', 'templates')
@@ -65,12 +102,17 @@ def create_app():
 #    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
+    firebase = pyrebase.initialize_app(firebase_config)
+    app.firebase_auth = firebase.auth()
+
     # Configure Flask-Mail
-    app.config['MAIL_SERVER'] = 'mail.joamcollections.com.ng'  # Your email server (e.g., smtp.gmail.com)
-    app.config['MAIL_PORT'] = 587  # Port for your email server (e.g., 587 for Gmail)
-    app.config['MAIL_USE_TLS'] = True  # Enable TLS encryption
-    app.config['MAIL_USERNAME'] = 'info@joamcollections.com.ng'  # Your email address
-    app.config['MAIL_PASSWORD'] = 'Joam_collections'  # Your email password
+    app.config['MAIL_SERVER'] = 'mail.sacoeteccscdept.com.ng'  # Your email server (e.g., smtp.gmail.com)
+    app.config['MAIL_PORT'] = 465  # Port for your email server (e.g., 587 for Gmail)
+    app.config['MAIL_USE_SSL'] = True 
+    app.config['MAIL_USE_TLS'] = False  # Enable TLS encryption
+    app.config['MAIL_USERNAME'] = 'noreply@sacoeteccscdept.com.ng'  # Your email address
+    app.config['MAIL_PASSWORD'] = 'Vicchi232312@'  # Your email password
+    app.config['DEBUG'] = True
 
     db.init_app(app)
     mail.init_app(app)
@@ -124,30 +166,14 @@ def create_app():
     # Return the app
     return app
 
-#def create_database(app):
-#    """ This is a function that create the database """
-
-#    db_path = path.join('instance', DB_NAME)
+def create_database(app):
+    """This is a function that create the database"""
 
     # check if the path of our database doesn't exist then create it
-#    if not path.exists(db_path):
-#        with app.app_context():
-#            db.create_all()
-#        print('Created Database')
-#        return True
-#    return False
+    if not path.exists("website/" + DB_NAME):
+        with app.app_context():
+            db.create_all()
+        print("Created Database")
 
-
-#def create_default_admin():
-#    """ This is a function that insert that admin records """
-#    # Check if the default record already exists
-#    if not Admin.query.filter_by(username='VickkyKruz').first():
-#       admin = Admin(
-#            username='VickkyKruz',
-#            email='onwuegbuchulemvic02@gmail.com',
-#            password_hash=generate_password_hash('password123'),
-#            working_status='working',
-#            admin_office='super_admin'
-#        )
-#        db.session.add(admin)
-#        db.session.commit()
+# Explicitly expose event_app and telemedical_app for imports
+__all__ = ["event_app", "telemedical_app"]

@@ -1,0 +1,3 @@
+# PyPI configuration file
+.pypirc
+website/static/firebase/key/*.json
