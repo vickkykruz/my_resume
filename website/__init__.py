@@ -146,22 +146,11 @@ def create_app():
         return render_template('405.html')
 
 
-    # @app.before_request
-    # def log_request_info():
-    #    app.logger.info('Headers: %s', request.headers)
-    #    app.logger.info('Body: %s', request.get_data())
-
-
-    # Define the route for serving uploaded files
-#    @app.route('/<filename>')
-#    def uploaded_file(filename):
-#        return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-
-
     # Import the schemer of our database
-#    from website.clients.models.models import User
+    from website.clients.models.models import Testimonals
 #    from website.admin.models.models import Admin
-    # create_database(app)
+    create_database(app)
+
 #    if create_database(app):
 #        with app.app_context():
 
