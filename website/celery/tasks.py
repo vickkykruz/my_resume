@@ -7,7 +7,7 @@ from time import sleep
 import logging
 import base64
 from firebase_admin import storage
-from website.clients.models.utils import get_user_info_data
+#from website.clients.models.utils import get_user_info_data
 from dotenv import load_dotenv
 from os import path, environ, getenv
 import firebase_admin
@@ -77,49 +77,49 @@ def send_mail(self, message, **kwargs):
         raise self.retry(exc=e)
 
 
-@celery.task(bind=True, max_retries=3)
-def upload_file_to_firebase_task(self, file_data, file_key, content_type, file_path, task_role, task_key):
-    """Uploads a file to Firebase Storage asynchronously."""
+#@celery.task(bind=True, max_retries=3)
+#ef upload_file_to_firebase_task(self, file_data, file_key, content_type, file_path, task_role, task_key):
+#   """Uploads a file to Firebase Storage asynchronously."""
 
-    from website import db
-    #from website.clients.models.models import LandlordInfo, TenantInfo, Properties, PropertiesImages
+#   from website import db
+#   #from website.clients.models.models import LandlordInfo, TenantInfo, Properties, PropertiesImages
 
-    #print(f"Task Started: file_data={file_data}, file_name={file_name}, content_type={content_type}, path={path}, {task_role}, {task_key}")
+#   #print(f"Task Started: file_data={file_data}, file_name={file_name}, content_type={content_type}, path={path}, {task_role}, {task_key}")
 
-    try:
-        # Decode the Base64-encoded file data
-        decoded_file_data = base64.b64decode(file_data)
+#   try:
+#       # Decode the Base64-encoded file data
+#       decoded_file_data = base64.b64decode(file_data)
 
-        firebase_app = firebase_admin.get_app("telemedical")
+#       firebase_app = firebase_admin.get_app("telemedical")
 
         # Upload the file to Firebase
-        bucket = storage.bucket(app=firebase_app)
-        blob = bucket.blob(file_path)
-        blob.upload_from_string(decoded_file_data, content_type=content_type)
-        blob.make_public()
+#       bucket = storage.bucket(app=firebase_app)
+#       blob = bucket.blob(file_path)
+#       blob.upload_from_string(decoded_file_data, content_type=content_type)
+#       blob.make_public()
 
         # Prepare the profile picture URL to return
-        file_url = blob.public_url
-        user_data = None
+#       file_url = blob.public_url
+#       user_data = None
 
-        user_data = get_user_info_data(task_key, task_role)
+#       user_data = get_user_info_data(task_key, task_role)
 
 
-        if task_role == "student_info":
-            if user_data: 
+#       if task_role == "student_info":
+#           if user_data: 
                 # Update the file_key with the file URL
-                setattr(user_data, file_key, file_url)
-        else:
-            raise ValueError(f"Invalid task role: {task_role}")
+#               setattr(user_data, file_key, file_url)
+#       else:
+#           raise ValueError(f"Invalid task role: {task_role}")
 
 
-        db.session.commit()
-    except Exception as exc:
+#       db.session.commit()
+#   except Exception as exc:
         # Log the error
-        print(f"Task failed: {exc}")
+#       print(f"Task failed: {exc}")
         # Retry the task if it fails
-        raise self.retry(exc=exc, countdown=5)
+#       raise self.retry(exc=exc, countdown=5)
 
-    finally:
+#   finally:
         # Ensure the database session is closed
-        db.session.remove()
+#       db.session.remove()

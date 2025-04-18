@@ -134,7 +134,17 @@ def service_page():
     service_data = services[key][0]
     return render_template("service-details.html", navRoute=navRoute, service=service_data)
 
+@views.route("/share-your-experenice", methods=["GET"])
+def share_your_experenice():
+    """ This is a function that allows the employee to write about me work """
 
+    navRoute = "submit_testimonial_form"
+
+    return render_template("testimony_form_fill.html", navRoute=navRoute)
+
+
+
+###################### HELPERS  FUNCTIONS ##########################
 @views.route("/send-mail", methods=["POST"])
 def send_contact_mail():
     """ This is a function that process the contact us functionalities """
@@ -149,10 +159,16 @@ def send_contact_mail():
         return jsonify({"error": "All fields are required."}), 400
 
     try:
-        send_alert_email(subject, name, message, action, email)
+        send_alert_email(subject, name, message, message, email)
 
         return jsonify({"success": "Message sent successfully."}), 200
 
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({"error": f"Failed to send message: {str(e)}"}), 500
+
+@views.route("/submit-testimonial-form", methods=["POST"])
+def submit_testimonial_form():
+    """ This is a function that process the submittion of the testimonial form """
+
+    pass
