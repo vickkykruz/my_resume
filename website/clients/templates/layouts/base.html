@@ -125,6 +125,8 @@
   <script src="{{ url_for('views.static', filename='js/main.js') }}"></script>
   {% if navRoute == 'home' %}
   <script src="{{ url_for('views.static', filename='js/contact.js') }}"></script>
+  {% elif navRoute == 'submit_testimonial_form' %}
+  <script src="{{ url_for('views.static', filename='js/testimonial_form.js') }}"></script>
   {% endif %}
 
 </body>

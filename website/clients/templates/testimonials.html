@@ -1,0 +1,109 @@
+{% extends "layouts/bootstrap_base.html" %} {% block title %} Victor Chukwuemeka | Portfolio
+{% endblock %} {% block content %}
+
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          {% if category == 'danger' %}
+            <p class="text-danger fw-bold">
+              {{ message }}
+            </p>
+          {% else %}
+            <p class="text-success fw-bold">
+              {{ message }}
+            </p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+  {% endwith %}
+
+    {% if navRoute == "list_testimonals" %}
+    <section class="my-4">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Testimonials</h2>
+        <p></p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-12">
+            <table class="table table-striped-columns">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for testimonials in pending_testimonials %}
+                <tr>
+                  <th scope="row"><a href="/testimonial-details/{{ testimonials.bind_id }}">{{ loop.index }}</a></th>
+                  <td><a href="/testimonial-details/{{ testimonials.bind_id }}">{{ testimonials.name }}</a></td>
+                  <td><a href="/testimonial-details/{{ testimonials.bind_id }}">{{ testimonials.status }}</a></td>
+                  <td><a href="/testimonial-details/{{ testimonials.bind_id }}">{{ testimonials.create_date }}</a></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div><!-- End Contact Form -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Contact Section -->
+   {% elif navRoute == "view_testimonals" %}
+   <section class="my-4">
+
+      <!-- Section Title -->
+      <div class="container d-flex justify-content-between" data-aos="fade-up">
+        <h2>Testimonial Detail</h2>
+        {% if testimonial_details.status == "Publish" %}
+        <p class="text-success">{{ testimonial_details.status }}</p>
+        {% else %}
+        <p class="text-danger">{{ testimonial_details.status }}</p>
+        {% endif %}
+
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+           <div class="col-lg-4 col-md-4 col-sm-12">
+             <div class="text-center">
+               <img src="{{ testimonial_details.photo_url }}" class="w-50 img-fluid" alt=""/>
+             </div>
+           </div>
+           <div class="col-lg-8 col-md-8 col-sm-12">
+             <div class="border-bottom pb-2 my-3">
+               <h4 class="card-title"> <b>Name:</b> {{ testimonial_details.name }} </h4>
+             </div>
+             <div class="border-bottom pb-2 my-3">
+               <h4 class="card-title"> <b>Message:</b></h4>
+               <p> {{ testimonial_details.message }} </p>
+             </div>
+             <form action="/testimonial-details/{{ bind_id }}" method="POST">
+               <h4 class="card-title"> <b>Status:</b> </h4>
+               <select class="form-select" name="status" aria-label="Default select example">
+                 <option selected>None</option>
+                 <option value="Unpublish">Unpublish</option>
+                 <option value="Publish">Publish</option>
+               </select>
+
+               <div class="text-center my-4">
+                 <button type="submit" class="btn btn-warning btn-lg text-white"> Update Details </button>
+             </form>
+           </div>
+        </div>
+      </div>
+   </section>
+   {% endif %}
+  </main>
+{% endblock %}

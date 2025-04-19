@@ -5,7 +5,13 @@ This is a module that define views routes for the users to access...
 from flask import Blueprint, render_template, flash, request, redirect, url_for, make_response, current_app, session, jsonify, abort
 from website.mailer.mail import mail
 from flask_mail import Message
-from website.clients.models.utils import send_alert_email
+from website.clients.models.utils import send_alert_email, list_pending_testimonials, get_testimonial_info, get_all_publish_testimonial
+from website.clients.models.models import Testimonals
+from website import db
+from werkzeug.utils import secure_filename
+import os
+import base64
+
 
 # Define the BluePrint
 views = Blueprint(
@@ -22,7 +28,11 @@ def home():
     """This is a function that return the home page"""
     navRoute = "home"
 
-    return render_template("index.html", navRoute=navRoute)
+    # Get all Publish Testimonials
+
+    publish_testimonials = get_all_publish_testimonial()
+
+    return render_template("index.html", navRoute=navRoute, publish_testimonials=publish_testimonials)
 
 
 @views.route("/service-page")
@@ -143,6 +153,41 @@ def share_your_experenice():
     return render_template("testimony_form_fill.html", navRoute=navRoute)
 
 
+@views.route("/process_testimonials_requests", methods=["GET"])
+def view_all_testimonal_request():
+    """ This is a function that list all this testimonals """
+
+    navRoute = "list_testimonals"
+
+    pending_testimonials = list_pending_testimonials()
+
+    return render_template("testimonials.html", navRoute=navRoute, pending_testimonials=pending_testimonials)
+
+
+@views.route("/testimonial-details/<bind_id>", methods=["GET", "POST"])
+def testimonial_details(bind_id):
+    """ This is a function that handle the update and display of the testimonial details """
+
+    navRoute = "view_testimonals"
+
+    testimonial_details = get_testimonial_info(bind_id)
+
+    if request.method == "POST":
+
+        status = request.form.get("status")
+
+        if not status:
+            flash("Error: Mising inputs", "danger")
+            return redirect(url_for('views.testimonial_details', bind_id=bind_id))
+
+        testimonial_details.status = status
+        db.session.commit()
+
+        flash("Update Successfully", "success")
+        return redirect(url_for('views.view_all_testimonal_request'))
+
+    return render_template("testimonials.html", navRoute=navRoute, testimonial_details=testimonial_details, bind_id=bind_id)
+
 
 ###################### HELPERS  FUNCTIONS ##########################
 @views.route("/send-mail", methods=["POST"])
@@ -167,8 +212,52 @@ def send_contact_mail():
         print(f"Error: {e}")
         return jsonify({"error": f"Failed to send message: {str(e)}"}), 500
 
+
 @views.route("/submit-testimonial-form", methods=["POST"])
 def submit_testimonial_form():
     """ This is a function that process the submittion of the testimonial form """
 
-    pass
+    from website.celery.tasks import upload_file_to_firebase_task
+
+    try:
+        name = request.form.get("name")
+        email = request.form.get("email")
+        message = request.form.get("message")
+        role = request.form.get("role")
+        profile_photo = request.files.get("profile_pic")
+
+        if not all([name, email, message, role, profile_photo]):
+            return jsonify({"error": "All fields are required."}), 400
+
+        add_testimonial = Testimonals(
+                name=name,
+                email=email,
+                role=role,
+                message=message
+        )
+
+        db.session.add(add_testimonial)
+        db.session.commit()
+
+        bind_id = add_testimonial.bind_id
+
+        # Upload profile picture using Celery
+        face_image_filename = secure_filename(f"{bind_id}.png")
+        face_image_dir = "Victor_Chukwuemeka_Tesitmonal/faces/"
+        face_image_path = os.path.join(face_image_dir, face_image_filename)
+        image_bytes = profile_photo.read()
+
+        upload_file_to_firebase_task.delay(
+                file_data=base64.b64encode(image_bytes).decode('utf-8'),
+                file_key="photo_url",
+                content_type="image/png",
+                file_path=face_image_path,
+                task_role="testimonals",
+                task_key=bind_id
+        )
+
+        return jsonify({"success": "Message sent successfully."}), 200
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"error": f"Failed to send message: {str(e)}"}), 500

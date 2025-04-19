@@ -1,5 +1,33 @@
 """ This is modular that contain hepler functions """
 
+
+from website.clients.models.models import Testimonals
+
+
+def get_user_data(user_uid, userRole):
+    """ This function fetches user details based on role """
+
+    if not user_uid or not userRole:
+        return None  # Return None if either user_uid or userRole is missing
+
+    try:
+        user_data = None  # Initialize variable to avoid undefined reference
+
+        # Fetch data based on user role
+        if userRole == "testimonals":
+            user_data = Testimonals.query.filter_by(bind_id=user_uid).first()
+
+        if user_data:
+            return user_data
+        else:
+            print(f"User data not found in DB for UID: {user_uid}, Role: {userRole}")
+            return None
+
+    except Exception as e:
+        print(f"Error fetching user data: {e}")
+        return None
+
+
 def send_alert_email(template_title, name, message, action, recipient_email, link=None):
     """ This is a function that construct the mail """
     from website.celery.tasks import send_mail
@@ -392,3 +420,25 @@ def mail_template(title, name, message, action, link=None):
 
     return body
 
+
+def list_pending_testimonials():
+    """ This is a function that list all testing testimonials """
+
+    pending_testimonals = Testimonals.query.order_by(Testimonals.id.desc()).all()
+
+    return pending_testimonals
+
+
+def get_testimonial_info(bind_id):
+    """ This is a function that display the testimonial details """
+
+    testimonial_details = Testimonals.query.filter_by(bind_id=bind_id).first()
+
+    return testimonial_details
+
+def get_all_publish_testimonial():
+    """ This is a function that get all the publish testimonials """
+
+    all_publish_testimonials = Testimonals.query.filter_by(status="Publish").all()
+
+    return all_publish_testimonials
